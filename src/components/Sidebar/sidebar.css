@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.sidebar {
+    background-color: #1A428A;
+    width: 200px;
+    height: 100vh;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+}
+
+.sidebar img {
+    width: 80%;
+    margin-bottom: 20px;
+}
+
+.sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    flex: 1; /* Ocupa o espaço restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinha os itens no topo */
+}
+
+.sidebar-menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar-menu li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição para cor de fundo e texto */
+    font-family: 'Lato', sans-serif; /* Fonte Lato */
+    font-weight: 700; /* Negrito */
+}
+
+.sidebar-menu li a:hover,
+.sidebar-menu li.active a {
+    background-color: #fff; /* Cor de fundo ao passar o mouse ou selecionado */
+    color: #1A428A; /* Cor do texto ao passar o mouse ou selecionado */
+}
+
+#siderbardown{
+  width: 90%;
+  height: 45%;
+  display: flex;
+  justify-content: center;
+  background-color: #1D4997;
+  border-radius: 10px;
+}
