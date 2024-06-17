@@ -6,10 +6,11 @@ function RouteApp() {
     return ( 
         
         <BrowserRouter>     
-        <Sidebar/>          
+        <Sidebar>       
             <Routes>
                 <Route path="/" element = {<Main/>}/> 
-            </Routes>       
+            </Routes> 
+        </Sidebar>           
         </BrowserRouter> 
      );
 }
