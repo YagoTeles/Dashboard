@@ -23,17 +23,17 @@ const Sidebar = ({ children }) => {
                         <ul className="sidebar-menu">
                             <li>
                                 <NavLink exact to="/" activeClassName="active">
-                                    Item 1
+                                    Ranking
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/page2" activeClassName="active">
-                                    Item 2
+                                <NavLink to="/perfil" activeClassName="active">
+                                    Perfil
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink to="/page3" activeClassName="active">
-                                    Item 3
+                                <NavLink to="/compare" activeClassName="active">
+                                    Compare
                                 </NavLink>
                             </li>
                         </ul>
