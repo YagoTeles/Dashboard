@@ -1,54 +1,67 @@
 import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import KeyboardArrowDownRoundedIcon from '@mui/icons-material/KeyboardArrowDownRounded';
+import { styled } from '@mui/material/styles';
 
-export default function Buttondrop() {
+const StyledPopover = styled(Popover)(({ theme }) => ({
+  '& .MuiPopover-paper': {
+    width: '100%',
+  },
+}));
+
+function Buttondrop({ children }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [selectedOption, setSelectedOption] = React.useState('');
+  const [buttonWidth, setButtonWidth] = React.useState(0);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    setButtonWidth(event.currentTarget.offsetWidth);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
-
   const open = Boolean(anchorEl);
-  const id = open ? 'popover' : undefined;
+  const id = open ? 'simple-popover' : undefined;
 
   return (
     <div>
-      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+      <Button
+        aria-describedby={id}
+        variant="contained"
+        onClick={handleClick}
+        endIcon={<KeyboardArrowDownRoundedIcon />}
+        style={{ width: '200px' }} 
+      >
         Open Popover
       </Button>
-      <Popover
+      <StyledPopover
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
-          horizontal: 'center',
+          horizontal: 'left',
         }}
         transformOrigin={{
           vertical: 'top',
-          horizontal: 'center',
+          horizontal: 'left',
+        }}
+        PaperProps={{
+          style: {
+            width: buttonWidth,
+          },
         }}
       >
-        <RadioGroup value={selectedOption} onChange={handleChange}>
-          <FormControlLabel value="option1" control={<Radio />} label="Option 1" />
-          <FormControlLabel value="option2" control={<Radio />} label="Option 2" />
-          <FormControlLabel value="option3" control={<Radio />} label="Option 3" />
-        </RadioGroup>
-      </Popover>
+        <div style={{ padding: '10px' }}>
+          {children}
+        </div>
+      </StyledPopover>
     </div>
   );
 }
+
+export default Buttondrop;

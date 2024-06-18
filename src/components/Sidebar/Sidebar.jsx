@@ -12,7 +12,7 @@ import Buttondrop from '../buttongroup/Buttondrop';
 const Sidebar = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const location = useLocation();
-    const currentRoute = routesData.find(route3 => route3.route === location.pathname);
+    const currentRoute = routesData.find(route => route.route === location.pathname);
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -23,8 +23,7 @@ const Sidebar = ({ children }) => {
             <div className={`sidebar ${sidebarOpen ? '' : 'closed'}`}>
                 {sidebarOpen && (
                     <>
-                        <img src={logo1} alt="" />
-
+                        <img src={logo1} alt="Logo 1" />
                         <ul className="sidebar-menu">
                             <li>
                                 <NavLink exact to="/" activeClassName="active">
@@ -42,22 +41,25 @@ const Sidebar = ({ children }) => {
                                 </NavLink>
                             </li>
                         </ul>
-
                         <div id='siderbardown'>
-                            <img src={logo2} alt="" />
+                            <img src={logo2} alt="Logo 2" />
                         </div>
                     </>
                 )}
-
                 <button className="sidebar-toggle-button" onClick={toggleSidebar}>
-                    {sidebarOpen ? <ArrowBackIosNewRoundedIcon/> : <ArrowForwardIosRoundedIcon/>}
+                    {sidebarOpen ? <ArrowBackIosNewRoundedIcon /> : <ArrowForwardIosRoundedIcon />}
                 </button>
             </div>
-
             <div className={`content ${sidebarOpen ? 'content-open' : 'content-closed'}`}>
                 <div className='topbarcontent'>
                     {currentRoute ? currentRoute.name : ""}
-                    <Buttondrop/>
+                    {currentRoute && currentRoute.buttons.length > 0 && (
+                        <>
+                            {currentRoute.buttons.map((ButtonComponent, index) => (
+                                <React.Fragment key={index}>{ButtonComponent}</React.Fragment>
+                            ))}
+                        </>
+                    )}
                 </div>
                 {children}
             </div>
