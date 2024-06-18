@@ -1,0 +1,11 @@
+.estado {
+    fill: #cf0b0b; /* Cor padrão */
+  }
+  
+.blue {
+    fill: blue; /* Cor para estados com classe 'blue' */
+  }
+  
+.green {
+    fill: green; /* Cor para estados com classe 'green' */
+  }
