@@ -12,9 +12,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    overflow-y: auto; 
     transition: width 0.3s ease; 
-    z-index: 100; 
 }
 
 .sidebar img {
@@ -74,15 +72,15 @@
     height: 100%;
     overflow-y: auto; 
     transition: margin-left 0.3s ease;
-    margin-left: 205px;
+    margin-left: 200px;
 }
 
 .content.content-open {
-    margin-left: 205px; 
+    margin-left: 200px; 
 }
 
 .content.content-closed {
-    margin-left: 55px; 
+    margin-left: 50px; 
 }
 
 #siderbardown {
@@ -94,4 +92,11 @@
     background-color: #1D4997;
     border-radius: 10px;
     margin-bottom: 5%;
+}
+.topbarcontent{
+    height: 50px;
+    width: 100%;
+    background-color: whitesmoke;
+    display: flex;
+    align-items: center;
 }

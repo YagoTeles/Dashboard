@@ -8,14 +8,14 @@ function RouteApp() {
     return ( 
         
         <BrowserRouter>     
-        <Sidebar>       
-            <Routes>
-                <Route path="/" element = {<Navigate to="/ranking" />}/> 
-                <Route path="/perfil" element = {<Perfil/>}/> 
-                <Route path="/compare" element = {<Compare/>}/> 
-                <Route path="/ranking" element = {<Ranking/>}/> 
-            </Routes> 
-        </Sidebar>           
+            <Sidebar>       
+                <Routes>
+                    <Route path="/" element = {<Navigate to="/ranking" />}/> 
+                    <Route path="/perfil" element = {<Perfil/>}/> 
+                    <Route path="/compare" element = {<Compare/>}/> 
+                    <Route path="/ranking" element = {<Ranking/>}/> 
+                </Routes> 
+            </Sidebar>           
         </BrowserRouter> 
      );
 }

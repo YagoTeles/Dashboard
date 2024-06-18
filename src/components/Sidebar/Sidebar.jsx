@@ -5,9 +5,14 @@ import logo2 from '../../images/logo2.png';
 import './sidebar.css';
 import ArrowBackIosNewRoundedIcon from '@mui/icons-material/ArrowBackIosNewRounded';
 import ArrowForwardIosRoundedIcon from '@mui/icons-material/ArrowForwardIosRounded';
+import routesData from './topbarcontent';
+import { useLocation } from 'react-router-dom';
+import Buttondrop from '../buttongroup/Buttondrop';
 
 const Sidebar = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
+    const location = useLocation();
+    const currentRoute = routesData.find(route3 => route3.route === location.pathname);
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -50,6 +55,10 @@ const Sidebar = ({ children }) => {
             </div>
 
             <div className={`content ${sidebarOpen ? 'content-open' : 'content-closed'}`}>
+                <div className='topbarcontent'>
+                    {currentRoute ? currentRoute.name : ""}
+                    <Buttondrop/>
+                </div>
                 {children}
             </div>
         </div>
