@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Checkbox from '@mui/material/Checkbox';
 import Buttondrop from '../../components/buttongroup/Buttondrop';
 
-function RankingButton1() {
+function DualCheckbox() {
     const [checked, setChecked] = React.useState([true, false]);
 
     const handleChange1 = (event) => {
@@ -35,7 +35,9 @@ function RankingButton1() {
 
     return (  
         <div>
-        <Buttondrop>
+        <Buttondrop
+        buttondesc={"Selecione um Indicador"}
+        >
         <FormControlLabel
           label="Parent"
           control={
@@ -46,12 +48,9 @@ function RankingButton1() {
             />
           }
         />
-        
-        {children}
         </Buttondrop>
       </div>
     );
 }
 
-export default RankingButton1;
-//
+export default DualCheckbox;

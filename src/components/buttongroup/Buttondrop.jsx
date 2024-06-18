@@ -10,7 +10,7 @@ const StyledPopover = styled(Popover)(({ theme }) => ({
   },
 }));
 
-function Buttondrop({ children }) {
+function Buttondrop({ children,buttondesc,color='primary' }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [buttonWidth, setButtonWidth] = React.useState(0);
 
@@ -33,9 +33,11 @@ function Buttondrop({ children }) {
         variant="contained"
         onClick={handleClick}
         endIcon={<KeyboardArrowDownRoundedIcon />}
-        style={{ width: '200px' }} 
+        style={{ minWidth: '200px' , borderRadius:20}} 
+        sx={{ textTransform: 'none' }}
+        color={color}
       >
-        Open Popover
+        {buttondesc}
       </Button>
       <StyledPopover
         id={id}

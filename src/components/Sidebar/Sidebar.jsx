@@ -52,7 +52,9 @@ const Sidebar = ({ children }) => {
             </div>
             <div className={`content ${sidebarOpen ? 'content-open' : 'content-closed'}`}>
                 <div className='topbarcontent'>
-                    {currentRoute ? currentRoute.name : ""}
+                    <div className='title'>
+                        {currentRoute ? currentRoute.name : ""}
+                    </div>
                     {currentRoute && currentRoute.buttons.length > 0 && (
                         <>
                             {currentRoute.buttons.map((ButtonComponent, index) => (
