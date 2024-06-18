@@ -1,6 +1,28 @@
-import React from "react";
+import React, { useRef, useEffect } from 'react';
+import * as d3 from 'd3';
 
-function Icon() {
+function BrazilMap() {
+  const svgRef = useRef(null);
+
+  useEffect(() => {
+    const svg = d3.select(svgRef.current);
+
+    // Adiciona eventos de mouse aos caminhos
+    svg.selectAll('path')
+      .on('mouseover', function() {
+        d3.select(this)
+          .transition()
+          .duration(200)
+          .attr('fill', 'yellow'); // Exemplo de animação: mudar a cor do preenchimento
+      })
+      .on('mouseout', function() {
+        d3.select(this)
+          .transition()
+          .duration(200)
+          .attr('fill', '#5C95F1'); // Voltar à cor original ao remover o mouse
+      });
+  }, []);
+
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -9,6 +31,7 @@ function Icon() {
       viewBox="0 0 612.516 639.043"
       mapsvgGeoViewBox="-74.008595 5.275696 -34.789914 -33.743888"
       style={{ width: 612.516 }}
+      ref={svgRef}
     >
       <path
         id="BR-AC"
@@ -257,4 +280,4 @@ function Icon() {
   );
 }
 
-export default Icon;
+export default BrazilMap;
