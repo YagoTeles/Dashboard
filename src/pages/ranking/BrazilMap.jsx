@@ -1,28 +1,53 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import * as d3 from 'd3';
 
 function BrazilMap() {
   const svgRef = useRef(null);
+  const [clicked, setClicked] = useState(false);
+  const [currentId, setCurrentId] = useState("");
 
-  useEffect(() => {
-    const svg = d3.select(svgRef.current);
+  const handleClick = (event) => {
+    const path = event.target;
+    console.log(path.tagName)
+    if (path.tagName === 'path') {
+      if (!clicked) {
+   
+        d3.select(path)
+        .transition()
+        .duration(300)
+        .attr('opacity', 1); 
 
-    // Adiciona eventos de mouse aos caminhos
-    svg.selectAll('path')
-      .on('mouseover', function() {
-        d3.select(this)
+        d3.select(svgRef.current).selectAll('path')
+          .filter(function() { return this !== path; })
           .transition()
-          .duration(200)
-          .attr('fill', 'yellow'); // Exemplo de animação: mudar a cor do preenchimento
-      })
-      .on('mouseout', function() {
-        d3.select(this)
-          .transition()
-          .duration(200)
-          .attr('fill', '#5C95F1'); // Voltar à cor original ao remover o mouse
-      });
-  }, []);
+          .duration(300)
+          .attr('opacity', 0.3); 
+        setClicked(true)
+        setCurrentId(path.id)
+      }
+      else if (clicked && path.id == currentId){
+        d3.select(svgRef.current).selectAll('path')
+        .transition()
+        .duration(300)
+        .attr('opacity', 1); 
+        setClicked(false)
+        setCurrentId("")
+      }
+      else {
+        d3.select(path)
+        .transition()
+        .duration(300)
+        .attr('opacity', 1); 
 
+        d3.select(svgRef.current).selectAll('path')
+          .filter(function() { return this !== path; })
+          .transition()
+          .duration(300)
+          .attr('opacity', 0.3); 
+          setCurrentId(path.id)
+      }
+    }
+  };
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -30,8 +55,9 @@ function BrazilMap() {
       transform="scale(.97304)"
       viewBox="0 0 612.516 639.043"
       mapsvgGeoViewBox="-74.008595 5.275696 -34.789914 -33.743888"
-      style={{ width: 612.516 }}
+      style={{ width: 612.516 , cursor: 'pointer' }}
       ref={svgRef}
+      onClick={handleClick}
     >
       <path
         id="BR-AC"
