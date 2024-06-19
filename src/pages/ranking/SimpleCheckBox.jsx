@@ -15,6 +15,12 @@ const options = [
   { label: 'Instituições', value: 'option7' },
   { label: 'Infraestrutura', value: 'option8' },
   { label: 'Cooperação', value: 'option9' },
+  { label: 'Índice de Resultados', value: 'option10' },
+  { label: 'Competitividade Global', value: 'option11' },
+  { label: 'Intensidade Tecnológica', value: 'option12' },
+  { label: 'Propriedade Intelectual', value: 'option13' },
+  { label: 'Produção Científica', value: 'option14' },
+  { label: 'Empreendedorismo', value: 'option15' },
 ];
 
 function SimpleCheckBox() {
@@ -36,7 +42,9 @@ function SimpleCheckBox() {
             <FormControlLabel
               key={option.value}
               value={option.value}
-              control={<Radio />}
+              control={<Radio 
+              sx={{padding:'2px'}}
+              />}
               label={<div style={{fontSize:'10px'}}>{option.label}</div> }
               sx={{'& .MuiSvgIcon-root':{ fontSize: 21,}, }} 
             />

@@ -33,10 +33,14 @@ const BarChart = ({ data, widthBox, heightBox }) => {
   }
   useEffect(() => {
     if (!data || data.length === 0) return;
-
+    d3.selectAll('rect').remove()
+    d3.selectAll('text.value').remove()
+    d3.selectAll('text.label').remove()
     const margin = { top: 20, right: 30, bottom: 40, left: 20 },
       width = widthBox - margin.left - margin.right - 30,
       height = heightBox - margin.top - margin.bottom;
+
+    const sorted = [...data].sort((a, b) => d3.descending(a.value, b.value));
 
     const svg = d3.select(svgRef.current)
       .attr("width", width + margin.left + margin.right)
@@ -45,11 +49,11 @@ const BarChart = ({ data, widthBox, heightBox }) => {
       .attr("transform", `translate(${margin.left},${margin.top})`);
 
     const x = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.value)])
+      .domain([0, d3.max(sorted, d => d.value)])
       .range([0, width]);
 
     const y = d3.scaleBand()
-      .domain(data.map(d => d.label))
+      .domain(sorted.map(d => d.label))
       .range([0, height])
       .padding(0.3);
 
@@ -59,7 +63,7 @@ const BarChart = ({ data, widthBox, heightBox }) => {
 
     // Add the bars
     svg.selectAll("rect")
-      .data(data)
+      .data(sorted)
       .enter()
       .append("rect")
       .attr("x", 0)
@@ -74,7 +78,7 @@ const BarChart = ({ data, widthBox, heightBox }) => {
 
     // Add the values at the end of each bar
     svg.selectAll("text.value")
-      .data(data)
+      .data(sorted)
       .enter()
       .append("text")
       .attr("class", "value")
@@ -86,7 +90,7 @@ const BarChart = ({ data, widthBox, heightBox }) => {
 
     // Add the labels to the left of each bar
     svg.selectAll("text.label")
-      .data(data)
+      .data(sorted)
       .enter()
       .append("text")
       .attr("class", "label")

@@ -9,7 +9,6 @@ function BrazilMap({data}) {
 
     useEffect(() => {
       const sorted = [...data].sort((a, b) => d3.ascending(a.label, b.label));
-        setSortedData(sorted);
 
       const colorScale = d3.scaleLinear()
         .domain([0, 1])
