@@ -13,6 +13,7 @@ const Sidebar = ({ children }) => {
     const [sidebarOpen, setSidebarOpen] = useState(true);
     const location = useLocation();
     const currentRoute = routesData.find(route => route.route === location.pathname);
+   
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -62,7 +63,7 @@ const Sidebar = ({ children }) => {
                             ))}
                         </>
                     )}
-                </div>
+                </div >
                 {children}
             </div>
         </div>

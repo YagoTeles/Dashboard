@@ -1,9 +1,12 @@
 import RouteApp from "./routes/RouteApp";
 import React from 'react';
+import {SelectionProvider} from './contexts/SelectionContext'
 function App() {
   return (
     <div className="App" >
-        <RouteApp/>
+        <SelectionProvider>
+          <RouteApp/>
+        </SelectionProvider>
     </div>
   );
 }

@@ -1,11 +1,16 @@
-.estado {
-    fill: #cf0b0b; /* Cor padrão */
-  }
-  
-.blue {
-    fill: blue; /* Cor para estados com classe 'blue' */
-  }
-  
-.green {
-    fill: green; /* Cor para estados com classe 'green' */
-  }
+.title-page{
+  color: #1D4997;
+  font-weight: bold;
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ranking-main{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  min-width: 1200px;
+}

@@ -3,7 +3,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Buttondrop from '../../components/buttongroup/Buttondrop';
-
+import { useSelection } from '../../contexts/SelectionContext';
 // Exemplo de dados do array
 const options = [
   { label: 'Índice FIEC de Inovação', value: 'option1' },
@@ -18,10 +18,12 @@ const options = [
 ];
 
 function SimpleCheckBox() {
-  const [selectedValue, setSelectedValue] = React.useState('option1'); // Valor inicial selecionado
-
+  const { selectedOption, setSelectedOption } = useSelection();
+  
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+    const { value } = event.target;
+    const option = options.find(opt => opt.value === value);
+    setSelectedOption(option);
   };
 
   return (
@@ -29,14 +31,14 @@ function SimpleCheckBox() {
       <Buttondrop
       buttondesc={"Selecione um Indicador"}
       >
-        <RadioGroup value={selectedValue} onChange={handleChange}>
+        <RadioGroup value={selectedOption.value} onChange={handleChange}>
           {options.map((option) => (
             <FormControlLabel
               key={option.value}
               value={option.value}
               control={<Radio />}
-              label={option.label}
-              sx={{'& .MuiSvgIcon-root':{ fontSize: 18,}, }} 
+              label={<div style={{fontSize:'10px'}}>{option.label}</div> }
+              sx={{'& .MuiSvgIcon-root':{ fontSize: 21,}, }} 
             />
           ))}
         </RadioGroup>
