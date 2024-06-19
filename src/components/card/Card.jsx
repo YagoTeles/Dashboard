@@ -1,5 +1,5 @@
 
-function Card({ children, height=100, width=100}) {
+function Card({ children, height=100, width=130}) {
     const cardStyle = {
         backgroundColor: '#FFFFFF',
         borderRadius: '10px',

@@ -1,0 +1,31 @@
+.separator1{
+    height: calc(100vh - 60px);
+    width: 50%;
+}
+.separator2{
+    height: calc(100vh - 60px);
+    width: 50%;
+}
+.perfil-main{
+    display: flex;
+}
+.capacidades-main{
+    padding: 20px;
+}
+.capacidades{
+    background-color: #2F80ED;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 5px 15px;
+    color: white;
+}
+.capacidades-cards{
+    display: flex;
+    width: 60%;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+    justify-content: flex-start;
+}

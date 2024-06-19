@@ -1,53 +1,82 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import * as d3 from 'd3';
 
-function BrazilMap() {
-  const svgRef = useRef(null);
-  const [clicked, setClicked] = useState(false);
-  const [currentId, setCurrentId] = useState("");
 
-  const handleClick = (event) => {
-    const path = event.target;
-    console.log(path.tagName)
-    if (path.tagName === 'path') {
-      if (!clicked) {
-   
-        d3.select(path)
-        .transition()
-        .duration(300)
-        .attr('opacity', 1); 
-
-        d3.select(svgRef.current).selectAll('path')
-          .filter(function() { return this !== path; })
-          .transition()
-          .duration(300)
-          .attr('opacity', 0.3); 
-        setClicked(true)
-        setCurrentId(path.id)
+  const data = [
+    { label: 'DF', value: 0.831 },
+    { label: 'SC', value: 0.827 },
+    { label: 'SP', value: 0.783 },
+    { label: 'PR', value: 0.741 },
+    { label: 'RJ', value: 0.726 },
+    { label: 'RS', value: 0.705 },
+    { label: 'BA', value: 0.658 },
+    { label: 'MT', value: 0.647 },
+    { label: 'RR', value: 0.594 },
+    { label: 'MG', value: 0.577 },
+    { label: 'CE', value: 0.566 },
+    { label: 'MS', value: 0.548 },
+    { label: 'ES', value: 0.544 },
+    { label: 'AC', value: 0.541 },
+    { label: 'RO', value: 0.518 },
+    { label: 'AP', value: 0.502 },
+    { label: 'GO', value: 0.481 },
+    { label: 'MA', value: 0.455 },
+    { label: 'AL', value: 0.448 },
+    { label: 'PE', value: 0.429 },
+    { label: 'PA', value: 0.403 },
+    { label: 'RN', value: 0.397 },
+    { label: 'SE', value: 0.370 },
+    { label: 'PB', value: 0.354 },
+    { label: 'PI', value: 0.342 },
+    { label: 'AM', value: 0.318 },
+    { label: 'TO', value: 0.277 },
+  ];
+  
+  function BrazilMap() {
+    const svgRef = useRef(null);
+    const [clicked, setClicked] = useState(false);
+    const [currentId, setCurrentId] = useState("");
+  
+    useEffect(() => {
+      const colorScale = d3.scaleLinear()
+        .domain([0, 1])
+        .range(["lightblue", "darkblue"]);
+  
+      // Seleciona todos os paths dentro do SVG e aplica as cores
+      d3.select(svgRef.current).selectAll("path")
+        .data(data)
+        .attr("id", data.map(d => d.label))
+        .attr("fill", d => colorScale(d.value))
+        .on("click", handleClick)
+  
+    }, [data]);
+  
+    const handleClick = (event, d) => {
+      const path = event.target;
+      if (path.tagName === 'path') {
+        const id = path.id;
+  
+        if (!clicked || id !== currentId) {
+          d3.select(svgRef.current).selectAll('path')
+            .transition()
+            .duration(300)
+            .attr('opacity', d => (id === d.label) ? 1 : 0.3);
+  
+          setClicked(true);
+          setCurrentId(id);
+        } else {
+          d3.select(svgRef.current).selectAll('path')
+            .transition()
+            .duration(300)
+            .attr('opacity', 1);
+  
+          setClicked(false);
+          setCurrentId("");
+        }
       }
-      else if (clicked && path.id == currentId){
-        d3.select(svgRef.current).selectAll('path')
-        .transition()
-        .duration(300)
-        .attr('opacity', 1); 
-        setClicked(false)
-        setCurrentId("")
-      }
-      else {
-        d3.select(path)
-        .transition()
-        .duration(300)
-        .attr('opacity', 1); 
-
-        d3.select(svgRef.current).selectAll('path')
-          .filter(function() { return this !== path; })
-          .transition()
-          .duration(300)
-          .attr('opacity', 0.3); 
-          setCurrentId(path.id)
-      }
-    }
-  };
+    };
+  
+  
   return (
     <svg
       transform="scale(.97304)"
@@ -76,7 +105,7 @@ function BrazilMap() {
         data-stroke-width="1"
       ></path>
       <path
-        id="AM"
+        id="SP"
         fill="#5C95F1"
         stroke="#FFF"
         strokeWidth="1.028"
@@ -283,7 +312,7 @@ function BrazilMap() {
         data-stroke-width="1"
       ></path>
       <path
-        id="SP"
+        id="AM"
         fill="#5C95F1"
         stroke="#FFF"
         strokeWidth="1.028"
