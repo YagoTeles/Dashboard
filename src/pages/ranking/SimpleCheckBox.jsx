@@ -4,7 +4,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import Buttondrop from '../../components/buttongroup/Buttondrop';
 import { useSelection } from '../../contexts/SelectionContext';
-// Exemplo de dados do array
+
 const options = [
   { label: 'Índice FIEC de Inovação', value: 'option1' },
   { label: 'Índice de Capacidades', value: 'option2' },

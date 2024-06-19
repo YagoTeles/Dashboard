@@ -1,51 +1,23 @@
 import React, { useRef, useState, useEffect } from 'react';
 import * as d3 from 'd3';
-
-
-  const data = [
-    { label: 'DF', value: 0.831 },
-    { label: 'SC', value: 0.827 },
-    { label: 'SP', value: 0.783 },
-    { label: 'PR', value: 0.741 },
-    { label: 'RJ', value: 0.726 },
-    { label: 'RS', value: 0.705 },
-    { label: 'BA', value: 0.658 },
-    { label: 'MT', value: 0.647 },
-    { label: 'RR', value: 0.594 },
-    { label: 'MG', value: 0.577 },
-    { label: 'CE', value: 0.566 },
-    { label: 'MS', value: 0.548 },
-    { label: 'ES', value: 0.544 },
-    { label: 'AC', value: 0.541 },
-    { label: 'RO', value: 0.518 },
-    { label: 'AP', value: 0.502 },
-    { label: 'GO', value: 0.481 },
-    { label: 'MA', value: 0.455 },
-    { label: 'AL', value: 0.448 },
-    { label: 'PE', value: 0.429 },
-    { label: 'PA', value: 0.403 },
-    { label: 'RN', value: 0.397 },
-    { label: 'SE', value: 0.370 },
-    { label: 'PB', value: 0.354 },
-    { label: 'PI', value: 0.342 },
-    { label: 'AM', value: 0.318 },
-    { label: 'TO', value: 0.277 },
-  ];
-  
-  function BrazilMap() {
+ 
+function BrazilMap({data}) {
     const svgRef = useRef(null);
     const [clicked, setClicked] = useState(false);
     const [currentId, setCurrentId] = useState("");
-  
+    const [sortedData, setSortedData] = useState([]);
+
     useEffect(() => {
+      const sorted = [...data].sort((a, b) => d3.ascending(a.label, b.label));
+        setSortedData(sorted);
+
       const colorScale = d3.scaleLinear()
         .domain([0, 1])
         .range(["lightblue", "darkblue"]);
   
-      // Seleciona todos os paths dentro do SVG e aplica as cores
       d3.select(svgRef.current).selectAll("path")
-        .data(data)
-        .attr("id", data.map(d => d.label))
+        .data(sorted)
+        .attr("id", sorted.map(d => d.label))
         .attr("fill", d => colorScale(d.value))
         .on("click", handleClick)
   
@@ -105,7 +77,7 @@ import * as d3 from 'd3';
         data-stroke-width="1"
       ></path>
       <path
-        id="SP"
+        id="AM"
         fill="#5C95F1"
         stroke="#FFF"
         strokeWidth="1.028"
@@ -312,7 +284,7 @@ import * as d3 from 'd3';
         data-stroke-width="1"
       ></path>
       <path
-        id="AM"
+        id="SP"
         fill="#5C95F1"
         stroke="#FFF"
         strokeWidth="1.028"
