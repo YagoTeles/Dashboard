@@ -34,6 +34,8 @@ Contextos foram utilizados para gerenciar o estado das informações selecionada
 ### Melhoria na organização
 É possivel melhorar a organizaçao dos arquivos em suas devidas pastas assim como os nomes condizentes com as funcionalidades, isso permite que em caso de manutençao por outro desenvolvedor seja possivel indenticar o codigo a se modificado mais facilmente.
 
+### Conclusão da aplicação
+Devido a limitações de tempo, não foi possível implementar todos os pontos solicitados para a aplicação.
 
 
 
