@@ -11,9 +11,24 @@
  * Material UI - Utilização de botões, checkboxes e radios
 
 ## Rodando serviço
-### React.js
-[Instalar Node JS](https://nodejs.org/en/download)
 
+### Instalação Docker
+[Instalar Docker - Linux](https://docs.docker.com/desktop/install/linux-install/)
+[Instalar Docker - Windows](https://docs.docker.com/desktop/install/windows-install/)
+
+### Baixar o repositório
+git clone https://github.com/YagoTeles/Dashboard.git
+cd Dashboard
+
+### Executar Docker
+
+#### Construir a imagem
+docker pull node:lts-alpine3.20
+docker build -t nome-imagem .
+
+#### Iniciar container com a porta desejada
+Ex: Porta 5000
+docker run -p 5000:3000 nome-imagem
 
 
 ## Observações
@@ -32,7 +47,7 @@ D3.js é uma biblioteca poderosa que possibilita diversas manipulações de dado
 Contextos foram utilizados para gerenciar o estado das informações selecionadas nos botões. Revisar e otimizar o uso desses contextos pode melhorar a organização e desempenho geral da aplicação.
 
 ### Melhoria na organização
-É possivel melhorar a organizaçao dos arquivos em suas devidas pastas assim como os nomes condizentes com as funcionalidades, isso permite que em caso de manutençao por outro desenvolvedor seja possivel indenticar o codigo a se modificado mais facilmente.
+É possivel melhorar a organizaçao dos arquivos em suas devidas pastas assim como os nomes condizentes com as funcionalidades, isso permite que em caso de manutençao por outro desenvolvedor seja possivel identificar o codigo a se modificado mais facilmente.
 
 ### Conclusão da aplicação
 Devido a limitações de tempo, não foi possível implementar todos os pontos solicitados para a aplicação.
