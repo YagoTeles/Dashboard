@@ -4,9 +4,12 @@ import dataTest from '../../data/dataTest'
 import './perfil.css'
 import { useGroups } from '../../contexts/GroupsContext';
 
-function ProfileCards({color,dataCards,title,cardStyle}) {
+function ProfileCards({color,dataCards,cardStyle,type = 1}) {
     const fontSize = 10
     const { groups } = useGroups();
+    const styleWidth = type === 1 ? '80%' : '100%';
+    const justifyC = type === 1 ? 'flex-start' : 'center';
+   
     const maxValueObj = (option) => {
         const checkedIds = [];
         const dataObject = dataTest[option]
@@ -28,12 +31,20 @@ function ProfileCards({color,dataCards,title,cardStyle}) {
         
         return ret
     }
+
+    const retColor = (index) => {
+        const colorByIndex = ['#00408D','#2F80ED','#3BC3DF']
+        if (type === 1){
+            return color
+        }
+        else{
+            if (index > 2 ) index = 2
+            return colorByIndex[index]
+        }
+    }
     return (  
     <>
-    <div className='title-base-profile' style={{backgroundColor: color}}>
-        {title}
-    </div> 
-    <div className="profile-cards"> 
+    <div className="profile-cards" style={{width:styleWidth,justifyContent:justifyC}}> 
     {dataCards.map((item, index) => (
         <Card cardStyle = {cardStyle}>
             <div style={{display:'flex',height:'64%',width:'100%'}}>
@@ -51,7 +62,7 @@ function ProfileCards({color,dataCards,title,cardStyle}) {
                     </div>      
                 </div>
             </div>
-            <div className="profile-down-card" style={{backgroundColor:color}}>
+            <div className="profile-down-card" style={{backgroundColor:retColor(index)}}>
                 {item.label}
             </div>
         </Card>                    

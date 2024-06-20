@@ -14,11 +14,9 @@
 }
 .profile-cards{
     display: flex;
-    width: 80%;
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 10px;
-    justify-content: flex-start;
 }
 .profile-down-card{
     height: 22px;

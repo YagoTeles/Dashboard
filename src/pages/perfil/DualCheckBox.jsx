@@ -1,13 +1,11 @@
 import { Box, FormControlLabel, Checkbox } from '@mui/material';
 import Buttondrop from '../../components/buttongroup/Buttondrop';
-import React, { createContext, useState } from 'react';
-import dataStates from '../../data/dataStates'
-import { GroupsProvider, useGroups } from '../../contexts/GroupsContext';
+import React from 'react';
+import {useGroups } from '../../contexts/GroupsContext';
 
-const DualCheckBox = () => {
+const DualCheckBox = ({buttondesc="Regiões",color='primary',context = 1}) => {
   
   const { groups, setGroups } = useGroups();
-
   const handleChangeParent = (groupIndex) => (event) => {
     const isChecked = event.target.checked;
     const newGroups = groups.map((group, idx) => ({
@@ -28,7 +26,7 @@ const DualCheckBox = () => {
 
   return (
     <div>
-      <Buttondrop buttondesc="Regiões">
+      <Buttondrop buttondesc={buttondesc} color={color}>
         {groups.map((group, groupIndex) => (
           <div key={groupIndex}>
             <FormControlLabel

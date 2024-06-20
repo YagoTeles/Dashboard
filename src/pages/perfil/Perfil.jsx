@@ -9,6 +9,7 @@ function Perfil() {
     const capacidadesCards = dataDesc.filter(item => item.type === 'C');
     const resultadosCards = dataDesc.filter(item => item.type === 'R');
     const indicesCards = dataDesc.filter(item => item.type === 'I');
+    
     const cardStyle = {
         backgroundColor: '#FFFFFF',
         borderRadius: '10px',
@@ -23,8 +24,14 @@ function Perfil() {
     return (  
         <div style={{display: 'flex',padding: '20px'}}>
             <div className="separator">   
+                <div className='title-base-profile' style={{backgroundColor: '#2F80ED'}}>
+                    Capacidades
+                </div> 
                 <ProfileCards color={'#2F80ED'} title={'Capacidades'} dataCards={capacidadesCards} cardStyle={cardStyle}/>
                 <br/> 
+                <div className='title-base-profile' style={{backgroundColor: '#3BC3DF'}}>
+                    Resultados
+                </div>
                 <ProfileCards color={'#3BC3DF'} title={'Resultados'} dataCards={resultadosCards} cardStyle={cardStyle}/> 
             </div>
             <div className="separator">
@@ -37,13 +44,7 @@ function Perfil() {
                             Nordeste
                         </div>
                         <div className="region-summary"> 
-                            {indicesCards.map((item, index) => (
-                                <Card cardStyle = {cardStyle}>
-                                    <div className="profile-down-card" style={{backgroundColor:'#2F80ED'}}>
-                                        {item.label}
-                                    </div>
-                                </Card>                    
-                            ))}                    
+                            <ProfileCards dataCards={indicesCards} cardStyle={cardStyle} type={2}/>                 
                         </div>
                         <div style={{color:'#1A428A',fontWeight:'bold',fontSize:'21px'}}>
                             Desempenho Indicadores
