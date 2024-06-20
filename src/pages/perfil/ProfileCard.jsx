@@ -2,11 +2,31 @@ import "./perfil.css"
 import Card from "../../components/card/Card";
 import dataTest from '../../data/dataTest'
 import './perfil.css'
+import { useGroups } from '../../contexts/GroupsContext';
+
 function ProfileCards({color,dataCards,title,cardStyle}) {
     const fontSize = 10
+    const { groups } = useGroups();
     const maxValueObj = (option) => {
+        const checkedIds = [];
         const dataObject = dataTest[option]
-        return dataObject.reduce((max, obj) => obj.value > max.value ? obj : max, dataObject[0]).value
+        let ret = 0
+        groups.forEach(region => {
+            region.children.forEach(child => {
+                if (child.checked) {
+                    checkedIds.push(child.id);
+                }
+            });
+        });
+        const filteredData = dataObject.filter(item => checkedIds.includes(item.label));
+        if (filteredData.length > 0 ){
+            ret = filteredData.reduce((max, obj) => obj.value > max.value ? obj : max, filteredData[0]).value
+        }
+        else{
+            ret = 0
+        }
+        
+        return ret
     }
     return (  
     <>

@@ -1,10 +1,12 @@
 import { Box, FormControlLabel, Checkbox } from '@mui/material';
 import Buttondrop from '../../components/buttongroup/Buttondrop';
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import dataStates from '../../data/dataStates'
+import { GroupsProvider, useGroups } from '../../contexts/GroupsContext';
+
 const DualCheckBox = () => {
   
-  const [groups, setGroups] = useState(dataStates);
+  const { groups, setGroups } = useGroups();
 
   const handleChangeParent = (groupIndex) => (event) => {
     const isChecked = event.target.checked;

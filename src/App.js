@@ -1,12 +1,15 @@
 import RouteApp from "./routes/RouteApp";
 import React from 'react';
 import {SelectionProvider} from './contexts/SelectionContext'
+import {GroupsProvider } from './contexts/GroupsContext'
 function App() {
   return (
     <div className="App" >
-        <SelectionProvider>
-          <RouteApp/>
-        </SelectionProvider>
+        <GroupsProvider>
+          <SelectionProvider>
+            <RouteApp/>
+          </SelectionProvider>
+        </GroupsProvider>
     </div>
   );
 }

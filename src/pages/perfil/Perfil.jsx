@@ -3,7 +3,9 @@ import Card from "../../components/card/Card";
 import dataDesc from "../../data/dataDesc";
 import ProfileCards from "./ProfileCard";
 
+
 function Perfil() {
+    
     const capacidadesCards = dataDesc.filter(item => item.type === 'C');
     const resultadosCards = dataDesc.filter(item => item.type === 'R');
     const indicesCards = dataDesc.filter(item => item.type === 'I');
