@@ -61,7 +61,6 @@ const BarChart = ({ data, widthBox, heightBox }) => {
       .domain([0, 1])
       .range(["lightblue", "darkblue"]);
 
-    // Add the bars
     svg.selectAll("rect")
       .data(sorted)
       .enter()
@@ -76,7 +75,6 @@ const BarChart = ({ data, widthBox, heightBox }) => {
         changeStats(d.label)
       });
 
-    // Add the values at the end of each bar
     svg.selectAll("text.value")
       .data(sorted)
       .enter()
@@ -88,7 +86,6 @@ const BarChart = ({ data, widthBox, heightBox }) => {
       .attr("fill", "black")
       .attr("font-size", "10px");
 
-    // Add the labels to the left of each bar
     svg.selectAll("text.label")
       .data(sorted)
       .enter()

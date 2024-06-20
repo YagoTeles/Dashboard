@@ -18,7 +18,6 @@ export const RadarGrid = ({
 }) => {
   const lineGenerator = d3.lineRadial();
 
-  // Compute Axes = from center to outer
   const allAxes = axisConfig.map((axis, i) => {
     const angle = xScale(axis.name);
 
@@ -53,7 +52,6 @@ export const RadarGrid = ({
     );
   });
 
-  // Compte grid = concentric circles
   const allCircles = [...Array(GRID_NUMBER).keys()].map((position, i) => {
     return (
       <circle

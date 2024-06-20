@@ -27,7 +27,6 @@ export const Radar = ({ width, height, data, axisConfig ,data2}) => {
   
   const allGroups = data.map((d) => d.name);
   
-  //const colorScale = d3.scaleOrdinal().domain(allGroups).range(color);
   const colorScale = d3.scaleOrdinal().domain(allGroups).range(color);
 
   const lineGenerator = d3.lineRadial();
