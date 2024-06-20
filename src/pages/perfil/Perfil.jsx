@@ -15,7 +15,8 @@ function Perfil() {
         height: 100,
         width: 170,
         display: 'flex',
-        alignItems:'end'
+        justifyContent:'flex-end',
+        flexDirection:'column',
     }
     return (  
         <div style={{display: 'flex',padding: '20px'}}>

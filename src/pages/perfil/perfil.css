@@ -45,3 +45,9 @@
     align-items: center;
     gap: 40px;
 }
+
+.profile-center-card {
+    height: 55px;
+    width: 46%;
+    text-align: center;
+}
