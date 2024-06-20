@@ -1,41 +1,37 @@
 import * as React from 'react';
+import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
 import Buttondrop from '../../components/buttongroup/Buttondrop';
-import { useSelection } from '../../contexts/SelectionContext';
-import dataDesc from '../../data/dataDesc';
 
-function SimpleCheckBox() {
-  const { selectedOption, setSelectedOption } = useSelection();
-  
-  const handleChange = (event) => {
-    const { value } = event.target;
-    const option = dataDesc.find(opt => opt.value === value);
-    setSelectedOption(option);
+function RadioSelect() {
+  const options = ["Centro-Oeste", "Nordeste", "Norte", "Sudeste", "Sul"];
+
+  const [checked, setChecked] = React.useState(new Array(options.length).fill(false));
+
+  const handleChange = (index) => (event) => {
+    const newChecked = [...checked];
+    newChecked[index] = event.target.checked;
+    setChecked(newChecked);
+  };
+
+  const renderCheckboxes = () => {
+    return options.map((option, index) => (
+      <FormControlLabel
+        key={index}
+        label={option}
+        control={<Checkbox checked={checked[index]} onChange={handleChange(index)} />}
+        style={{ display: 'block'}}
+      />
+    ));
   };
 
   return (
     <div>
-      <Buttondrop
-      buttondesc={"Selecione um Indicador"}
-      >
-        <RadioGroup value={selectedOption.value} onChange={handleChange}>
-          {dataDesc.map((option) => (
-            <FormControlLabel
-              key={option.value}
-              value={option.value}
-              control={<Radio 
-              sx={{padding:'2px'}}
-              />}
-              label={<div style={{fontSize:'10px'}}>{option.label}</div> }
-              sx={{'& .MuiSvgIcon-root':{ fontSize: 21,}, }} 
-            />
-          ))}
-        </RadioGroup>
+      <Buttondrop buttondesc={"Tipo de Regionalização"} color='secondary'>
+        {renderCheckboxes()}
       </Buttondrop>
     </div>
   );
 }
 
-export default SimpleCheckBox;
+export default RadioSelect;

@@ -1,56 +1,63 @@
-
-import FormControlLabel from '@mui/material/FormControlLabel';
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
+import { Box, FormControlLabel, Checkbox } from '@mui/material';
 import Buttondrop from '../../components/buttongroup/Buttondrop';
-
-function DualCheckbox() {
-    const [checked, setChecked] = React.useState([true, false]);
-
-    const handleChange1 = (event) => {
-      setChecked([event.target.checked, event.target.checked]);
-    };
+import React, { useState } from 'react';
+import dataStates from '../../data/dataStates'
+const DualCheckBox = () => {
   
-    const handleChange2 = (event) => {
-      setChecked([event.target.checked, checked[1]]);
-    };
-  
-    const handleChange3 = (event) => {
-      setChecked([checked[0], event.target.checked]);
-    };
-  
-    const children = (
-      <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
-        <FormControlLabel
-          label="Child 1"
-          control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
-        />
-        <FormControlLabel
-          label="Child 2"
-          control={<Checkbox checked={checked[1]} onChange={handleChange3} />}
-        />
-      </Box>
-    );
+  const [groups, setGroups] = useState(dataStates);
 
-    return (  
-        <div>
-        <Buttondrop
-        buttondesc={"Selecione um Indicador"}
-        >
-        <FormControlLabel
-          label="Parent"
-          control={
-            <Checkbox
-              checked={checked[0] && checked[1]}
-              indeterminate={checked[0] !== checked[1]}
-              onChange={handleChange1}
+  const handleChangeParent = (groupIndex) => (event) => {
+    const isChecked = event.target.checked;
+    const newGroups = [...groups];
+    newGroups[groupIndex].children = newGroups[groupIndex].children.map((child) => ({
+      ...child,
+      checked: isChecked,
+    }));
+    setGroups(newGroups);
+  };
+
+  const handleChangeChild = (groupIndex, childIndex) => (event) => {
+    const newGroups = [...groups];
+    newGroups[groupIndex].children[childIndex].checked = event.target.checked;
+    setGroups(newGroups);
+  };
+
+  return (
+    <div>
+      <Buttondrop buttondesc="Regiões">
+        {groups.map((group, groupIndex) => (
+          <div key={groupIndex}>
+            <FormControlLabel
+              label={ <div style={{fontSize:12}}>{group.parentLabel}</div> }
+              control={
+                <Checkbox
+                  checked={group.children.every((child) => child.checked)}
+                  indeterminate={group.children.some((child) => child.checked) && !group.children.every((child) => child.checked)}
+                  onChange={handleChangeParent(groupIndex)}
+                  sx={{'& .MuiSvgIcon-root': { fontSize: 18 }}}
+                />
+              }
             />
-          }
-        />
-        </Buttondrop>
-      </div>
-    );
-}
+            <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
+              {group.children.map((child, childIndex) => (
+                <FormControlLabel
+                  key={childIndex}
+                  label={<div style={{fontSize:12}}>{child.label}</div>}
+                  control={
+                    <Checkbox
+                      checked={child.checked}
+                      onChange={handleChangeChild(groupIndex, childIndex)}
+                      sx={{padding:0,'& .MuiSvgIcon-root': { fontSize: 18 }}}
+                    />
+                  }
+                />
+              ))}
+            </Box>
+          </div>
+        ))}
+      </Buttondrop>
+    </div>
+  );
+};
 
-export default DualCheckbox;
+export default DualCheckBox;
