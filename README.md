@@ -5,10 +5,10 @@
 3. [Observações](#observações) 
 
 ## Bibliotecas
-  * D3.js
-  * ReactJS
-  * react-router-dom
-  * Material UI
+ * ReactJS
+ * D3.js - Criação e manipulação de gráficos
+ * react-router-dom - Gestão de rotas da barra de navegação
+ * Material UI - Utilização de botões, checkboxes e radios
 
 ## Rodando serviço
 ### React.js
