@@ -14,7 +14,14 @@ function Perfil() {
                 <ProfileComponent color={'#3BC3DF'} title={'Resultados'} dataCards={resultadosCards}/> 
             </div>
             <div className="separator">
-                <Card/>
+                <Card
+                width={600}
+                height={650}
+                >
+                    <div>
+                        
+                    </div>
+                </Card>
             </div>
         </div>
     );
