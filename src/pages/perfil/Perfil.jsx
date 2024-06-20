@@ -3,7 +3,6 @@ import Card from "../../components/card/Card";
 import dataDesc from "../../data/dataDesc";
 import ProfileCards from "./ProfileCard";
 import {Radar} from '../../components/RadarChart/Radar'
-import { data } from '../../components/RadarChart/data';
 import dataTest from '../../data/dataTest'
 import { useGroups } from '../../contexts/GroupsContext';
 import React, { useEffect,useState} from 'react';
@@ -14,15 +13,11 @@ function Perfil() {
     const resultadosCards = dataDesc.filter(item => item.type === 'R');
     const indicesCards = dataDesc.filter(item => item.type === 'I');
     const [dataReturn, setDataReturn] = useState([]);
-    const data2 = [
-        { speed: 0.01, acceleration: 9.5, conso: 1.4, safety: 0.1, style: 90, price: 7, name: "mercedes" },
-        { speed: 4.9, acceleration: 3.0, conso: 9.4, safety: 0.2, style: 590, price: 76, name: "peugeot" },
-        { speed: 2.7, acceleration: 1.2, conso: 1.3, safety: 0.9, style: 990, price: 96, name: "honda" },
-      ]
+
     const {groups} = useGroups();
     const titles = []
-    let datateste = []
-
+    let dataMaxValue = []
+    let dataAvgValue = []
     const cardStyle = {
         backgroundColor: '#FFFFFF',
         borderRadius: '10px',
@@ -55,17 +50,54 @@ function Perfil() {
         
         return ret
       }
+
+      const averageValueObj = (option) => {
+        const checkedIds = [];
+        const dataObject = dataTest[option];
+        let sum = 0;
+        let count = 0;
+    
+        groups.forEach(region => {
+            region.children.forEach(child => {
+                if (child.checked) {
+                    checkedIds.push(child.id);
+                }
+            });
+        });
+    
+        const filteredData = dataObject.filter(item => checkedIds.includes(item.label));
+        
+        if (filteredData.length > 0) {
+            filteredData.forEach(obj => {
+                sum += obj.value;
+                count++;
+            });
+            return sum / count;
+        } else {
+            return 0;
+        }
+    }
+
     useEffect(() => {
         
-        datateste = []
+      dataMaxValue = []
+      dataAvgValue = []
       {dataDesc.map((item, index) => (
-        datateste.push({value:maxValueObj(item.value),label:item.label})
+        dataMaxValue.push({value:maxValueObj(item.value),label:item.label,name:'#6689c6'})
       ))} 
-      const tmp = datateste.reduce((acc, current) => {
+      let maxValue = dataMaxValue.reduce((acc, current) => {
         acc[current.label] = current.value;
         return acc;
     }, {})
-    setDataReturn([tmp])
+    {dataDesc.map((item, index) => (
+        dataAvgValue.push({value:averageValueObj(item.value),label:item.label,name:'#623423'})
+      ))} 
+      let avgValue = dataAvgValue.reduce((acc, current) => {
+        acc[current.label] = current.value;
+        return acc;
+    }, {})
+ 
+    setDataReturn([maxValue,avgValue])
     }, [groups]);
 
     {dataDesc.map((item, index) => (

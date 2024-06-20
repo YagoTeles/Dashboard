@@ -2,13 +2,10 @@ import * as d3 from 'd3';
 import { INNER_RADIUS, RadarGrid } from './RadarGrid';
 
 const MARGIN = 30;
-const COLORS = [
+const color = [
   '#e0ac2b',
   '#e85252',
   '#6689c6',
-  '#9a6fb0',
-  '#a53253',
-  '#69b3a2',
 ];
 
 
@@ -29,10 +26,12 @@ export const Radar = ({ width, height, data, axisConfig ,data2}) => {
   });
   
   const allGroups = data.map((d) => d.name);
-  const colorScale = d3.scaleOrdinal().domain(allGroups).range(COLORS);
+  
+  //const colorScale = d3.scaleOrdinal().domain(allGroups).range(color);
+  const colorScale = d3.scaleOrdinal().domain(allGroups).range(color);
 
   const lineGenerator = d3.lineRadial();
-
+  
   const allLines = data.map((series, i) => {
     const allCoordinates = axisConfig.map((axis) => {
       const yScale = yScales[axis.name];
@@ -41,7 +40,7 @@ export const Radar = ({ width, height, data, axisConfig ,data2}) => {
       const coordinate = [angle, radius];
       return coordinate;
     });
-
+    
     allCoordinates.push(allCoordinates[0]);
 
     const d = lineGenerator(allCoordinates);
@@ -54,9 +53,9 @@ export const Radar = ({ width, height, data, axisConfig ,data2}) => {
       <path
         key={i}
         d={d}
-        stroke={colorScale(series.name)}
+        stroke={color[i]}
         strokeWidth={3}
-        fill={colorScale(series.name)}
+        fill={color[i]}
         fillOpacity={0.1}
       />
     );
