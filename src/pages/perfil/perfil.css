@@ -1,31 +1,32 @@
-.separator1{
+.separator{
     height: calc(100vh - 60px);
     width: 50%;
 }
-.separator2{
-    height: calc(100vh - 60px);
-    width: 50%;
-}
-.perfil-main{
-    display: flex;
-}
-.capacidades-main{
-    padding: 20px;
-}
-.capacidades{
-    background-color: #2F80ED;
-    width: 60%;
+.title-base-profile{
+    width: 80%;
     display: flex;
     align-items: center;
     border-radius: 10px;
     padding: 5px 15px;
     color: white;
+    height: 20px;
+    font-weight: bold;
 }
-.capacidades-cards{
+.profile-cards{
     display: flex;
-    width: 60%;
+    width: 80%;
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 10px;
     justify-content: flex-start;
+}
+.profile-down-card{
+    height: 22px;
+    width: 100%;
+    border-radius: 6px;
+    color: white;
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

@@ -1,36 +1,19 @@
 import "./perfil.css"
 import Card from "../../components/card/Card";
+import dataDesc from "../../data/dataDesc";
+import ProfileComponent from "./profileComponent";
+
 function Perfil() {
+    const capacidadesCards = dataDesc.filter(item => item.type === 'C');
+    const resultadosCards = dataDesc.filter(item => item.type === 'R');
     return (  
-        <div className="perfil-main">
-            <div className="separator1">
-                <div className="capacidades-main">
-                    <div className="capacidades">
-                        Capacidades
-                    </div>
-                    <div className="capacidades-cards">
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                    </div>
-                    <br/>
-                    <div className="capacidades">
-                        Resultados
-                    </div>
-                    <div className="capacidades-cards">
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                        <Card/>
-                    </div>
-                </div>
+        <div style={{display: 'flex',padding: '20px'}}>
+            <div className="separator">             
+                <ProfileComponent color={'#2F80ED'} title={'Capacidades'} dataCards={capacidadesCards}/>
+                <br/>
+                <ProfileComponent color={'#3BC3DF'} title={'Resultados'} dataCards={resultadosCards}/> 
             </div>
-            <div className="separator2">
+            <div className="separator">
                 <Card/>
             </div>
         </div>
