@@ -1,10 +1,9 @@
 import Card from "../../components/card/Card";
 import dataDesc from "../../data/dataDesc";
 import ProfileCards from "../perfil/ProfileCard";
-
+import TableCompare from './TableCompare';
+import data from './compareDataTest'
 function Compare() {
-    const capacidadesCards = dataDesc.filter(item => item.type === 'C');
-    const resultadosCards = dataDesc.filter(item => item.type === 'R');
     const indicesCards = dataDesc.filter(item => item.type === 'I');
     const cardStyle = {
         backgroundColor: '#FFFFFF',
@@ -19,8 +18,9 @@ function Compare() {
     }
     return (  
         <div style={{display: 'flex',padding: '20px'}}>
-            <div className="separator">   
-                
+            <div className="separator" style={{display: 'flex',flexDirection:'column',alignItems:'center',justifyContent:'center', height:'600px'}}>   
+                <TableCompare data={data} title={'Capacidades'}/>
+                <TableCompare data={data} title={'Resultados'}/>   
             </div>
             <div className="separator">
             <Card
