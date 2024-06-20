@@ -8,10 +8,12 @@ const DualCheckBox = () => {
 
   const handleChangeParent = (groupIndex) => (event) => {
     const isChecked = event.target.checked;
-    const newGroups = [...groups];
-    newGroups[groupIndex].children = newGroups[groupIndex].children.map((child) => ({
-      ...child,
-      checked: isChecked,
+    const newGroups = groups.map((group, idx) => ({
+      ...group,
+      children: group.children.map((child, childIndex) => ({
+        ...child,
+        checked: idx === groupIndex ? isChecked : false,
+      })),
     }));
     setGroups(newGroups);
   };
@@ -28,11 +30,10 @@ const DualCheckBox = () => {
         {groups.map((group, groupIndex) => (
           <div key={groupIndex}>
             <FormControlLabel
-              label={ <div style={{fontSize:12}}>{group.parentLabel}</div> }
+              label={<div style={{fontSize:12}}>{group.parentLabel}</div>}
               control={
                 <Checkbox
                   checked={group.children.every((child) => child.checked)}
-                  indeterminate={group.children.some((child) => child.checked) && !group.children.every((child) => child.checked)}
                   onChange={handleChangeParent(groupIndex)}
                   sx={{'& .MuiSvgIcon-root': { fontSize: 18 }}}
                 />
@@ -61,3 +62,5 @@ const DualCheckBox = () => {
 };
 
 export default DualCheckBox;
+
+
